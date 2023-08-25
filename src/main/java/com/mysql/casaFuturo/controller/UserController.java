@@ -34,4 +34,8 @@ public class UserController {
     public  ResponseEntity<User> createUser(@RequestBody User user){
         return ResponseEntity.ok(userService.createUser(user));
     }
+    @PutMapping("/{id}")
+    public  ResponseEntity<User> createUser(@PathVariable Long id, @RequestBody User user){
+        return ResponseEntity.ok(userService.createUser(user));
+    }
 }
