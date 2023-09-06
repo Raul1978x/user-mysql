@@ -1,20 +1,8 @@
-window.onload = () => {
-    const formulario = document.getElementById("registrationForm");
-    const btn = document.querySelector(".traerUsuario")
 
-
-    formulario.addEventListener("submit", event => {
-        event.preventDefault();
-        agregarUsuario();
-    });
-
-    btn.addEventListener("click", traeUsuarios())
-
-}
 
 const usuarios = document.querySelector(".contenedorUsuarios")
 
-function verUsuarios(){
+function verUsuarios(user){
     usuarios.innerHTML = `
     <div class="containerUsuario">
         <h1>usuarios</h1>
@@ -46,7 +34,7 @@ function agregarUsuario() {
         password: password
     };
 
-    fetch("http://localhost:8080/", {
+    fetch("http://localhost:8080/api/v1/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -66,7 +54,7 @@ function agregarUsuario() {
 
 function traeUsuarios() {
 
-    fetch("http://localhost:8080/", {
+    fetch("http://localhost:8080/api/v1/users", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -75,8 +63,17 @@ function traeUsuarios() {
         .then(response => response.json())
         .then(data => {
             console.log("Usuarios:", data);
-            alert("click")
             data.forEach((usuario) => {
+                console.log(usuario)
+                console.log("usuarios",usuarios)
+                usuarios.innerHTML += `
+                <article>
+                    <h2>${usuario.nombre + " " + usuario.apellido} </h2>
+                    <p>email: ${usuario.email}</p>
+                    <p>direccion: ${usuario.direccion}</p>
+                    <p>codigo postal: ${usuario.codigoPostal}</p>
+                </article>`
+
                 usuarios.innerHtml += usuario
             })
         })
