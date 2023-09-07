@@ -1,5 +1,3 @@
-
-
 const usuarios = document.querySelector(".contenedorUsuarios")
 
 function verUsuarios(user){
@@ -22,8 +20,6 @@ function verRegistro(){
         </form>
     </div>`
 }
-
-
 
 function agregarUsuario() {
     const email = document.querySelector("#email").value;
@@ -62,7 +58,7 @@ function traeUsuarios() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log("Usuarios:", data);
+            usuarios.innerHTML = ""
             data.forEach((usuario) => {
                 console.log(usuario)
                 console.log("usuarios",usuarios)

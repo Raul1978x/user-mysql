@@ -20,5 +20,4 @@ public class User {
     private String DNI;
     private String direccion;
     private String codigoPostal;
-
 }
