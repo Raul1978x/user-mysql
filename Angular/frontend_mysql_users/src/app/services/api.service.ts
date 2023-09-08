@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../create-user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -18,4 +19,10 @@ export class ApiService implements OnInit {
   public getOneData(id:number):Observable<any> {
     return this.http.get<any>(this.urlApi+'/{{id}}')
   }
+
+  public createUser(formData : User ) : Observable<any> {
+    return this.http.post(this.urlApi, formData)
+  }
+
+
 }

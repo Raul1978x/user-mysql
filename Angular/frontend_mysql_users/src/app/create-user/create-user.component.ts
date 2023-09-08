@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from './user';
 import { FormControl, FormGroup  } from '@angular/forms'
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-create-user',
@@ -8,7 +8,9 @@ import { FormControl, FormGroup  } from '@angular/forms'
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent {
+  constructor( private apiService: ApiService ){
 
+  }
   usuario: any = new FormGroup({
     email: new FormControl<string|null>(''),
     password: new FormControl<string|null>(''),
@@ -22,6 +24,6 @@ export class CreateUserComponent {
     ); 
 
     onSubmit(){
-      
+      this.apiService.createUser(this.usuario)
     }
 }
