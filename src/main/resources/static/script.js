@@ -1,35 +1,12 @@
-
-window.onload = () => {
-    const formulario = document.getElementById("registrationForm");
-    const btn = document.querySelector(".traerUsuario")
-
-
-   formulario.addEventListener("submit", (event) => {
-       event.preventDefault();
-       agregarUsuario();
-   });
-
-   btn.addEventListener("click", traeUsuarios);
-
-};
-
 const usuarios = document.querySelector(".contenedorUsuarios")
+const form = document.querySelector(".registrationForm")
 
-
-function verRegistro(){
-    usuarios.innerHTML = `
-    <div class="contenedorUsuarios">
-        <h2>Registro de Usuario</h2>
-        <form id="registrationForm">
-            <label for="email">Correo Electrónico</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Registrarse</button>
-        </form>
-    </div>`
+window.onload = () =>{
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        agregarUsuario()
+    })
 }
-
 
 function agregarUsuario() {
     const email = document.querySelector("#email").value;
@@ -47,19 +24,14 @@ function agregarUsuario() {
         },
         body: JSON.stringify(userData)
     })
-        .then(response => {
-        if(response.ok) {return response.json();
-        }else {
-            throw new Error("Registracion fallida")
-        }
-    })
+        .then(response => response.json())
         .then(data => {
             console.log("Registro exitoso:", data);
             alert("registro existoso")
         })
         .catch(error => {
             console.error("Error en el registro:", error);
-            alert("error al registrar usuario")
+            // Manejo de errores, como mostrar un mensaje de error al usuario.
         });
 }
 
@@ -73,8 +45,15 @@ function traeUsuarios() {
     })
         .then(response => response.json())
         .then(data => {
+            usuarios.innerHTML = ""
             data.forEach((usuario) => {
-                usuarios.innerHtml += `<h2>${usuario.nombre}</h2>`
+                usuarios.innerHTML += `
+                <article>
+                    <h2>${usuario.nombre + " " + usuario.apellido} </h2>
+                    <p>email: ${usuario.email}</p>
+                    <p>direccion: ${usuario.direccion}</p>
+                    <p>codigo postal: ${usuario.codigoPostal}</p>
+                </article>`
             })
         })
         .catch(error => {
@@ -82,5 +61,3 @@ function traeUsuarios() {
             // Manejo de errores, como mostrar un mensaje de error al usuario.
         });
 }
-
-
