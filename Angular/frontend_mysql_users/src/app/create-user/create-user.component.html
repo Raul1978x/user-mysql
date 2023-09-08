@@ -1,0 +1,86 @@
+<br />
+<br />
+<h2 class="justify-content-center text-center bg-dark text-bg-dark py-1">
+  Registro
+</h2>
+<div class="container m-5">
+  <form [formGroup]="usuario" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nombre"
+        placeholder="nombre"
+        formControlName="nombre"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="apellido" class="form-label">Apellido</label>
+      <input
+        type="text"
+        class="form-control"
+        id="apellido"
+        placeholder="apellido"
+        formControlName="apellido"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="telefono"
+        placeholder="(codigo area) sin 15 (número)"
+        formControlName="telefono"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="direccion" class="form-label">Dirección</label>
+      <input
+        type="text"
+        class="form-control"
+        id="direccion"
+        placeholder="calle y número"
+        formControlName="direccion"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="dni" class="form-label">DNI</label>
+      <input type="text" class="form-control" id="dni" 
+      placeholder="DNI" 
+      formControlName="dni"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="codPostal" class="form-label">Código Postal</label>
+      <input
+        type="text"
+        class="form-control"
+        id="codPostal"
+        placeholder="Código Postal"
+        formControlName="codigoPostal"
+
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="nombre@ejemplo.com"
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password"/>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-dark d-flex justify-content-end" type="submit">
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
