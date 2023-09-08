@@ -3,27 +3,28 @@ window.onload = () => {
     const btn = document.querySelector(".traerUsuario")
 
 
-    formulario.addEventListener("submit", event => {
-        event.preventDefault();
-        agregarUsuario();
-    });
+   formulario.addEventListener("submit", (event) => {
+       event.preventDefault();
+       agregarUsuario();
+   });
 
-    btn.addEventListener("click", traeUsuarios())
+   btn.addEventListener("click", traeUsuarios);
 
-}
+};
 
-const usuarios = document.querySelector(".contenedorUsuarios")
+const usuariosContainer = document.querySelector(".contenedorUsuarios")
 
 function verUsuarios(){
-    usuarios.innerHTML = `
-    <div class="containerUsuario">
-        <h1>usuarios</h1>
+usuariosContainer.innerHTML = `
+    <div class="contenedorUsuarios">
+        <h1>usuarios 2222</h1>
+      <p>${usuarios.DNI}</p>
     </div>`
 }
 
 function verRegistro(){
     usuarios.innerHTML = `
-    <div class="containerUsuario">
+    <div class="contenedorUsuarios">
         <h2>Registro de Usuario</h2>
         <form id="registrationForm">
             <label for="email">Correo Electrónico</label>
@@ -46,21 +47,26 @@ function agregarUsuario() {
         password: password
     };
 
-    fetch("http://localhost:8080/", {
+    fetch("http://localhost:8080/api/v1/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(userData)
     })
-        .then(response => response.json())
+        .then(response => {
+        if(response.ok) {return response.json();
+        }else {
+            throw new Error("Registracion fallida")
+        }
+    })
         .then(data => {
             console.log("Registro exitoso:", data);
             alert("registro existoso")
         })
         .catch(error => {
             console.error("Error en el registro:", error);
-            // Manejo de errores, como mostrar un mensaje de error al usuario.
+            alert("error al registrar usuario").
         });
 }
 
