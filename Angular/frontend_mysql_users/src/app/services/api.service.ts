@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { User } from '../create-user/user';
 
 @Injectable({
@@ -9,20 +9,44 @@ import { User } from '../create-user/user';
 export class ApiService implements OnInit {
   private urlApi: string = 'http://localhost:8080/api/v1/users';
 
-  constructor(private http: HttpClient) {}
-  ngOnInit(): void {}
+  constructor(private http: HttpClient) { }
+  ngOnInit(): void { }
 
-  public getAllData(): Observable<any> {
+  public getAllUsers(): Observable<any> {
     return this.http.get<any>(this.urlApi);
   }
 
-  public getOneData(id:number):Observable<any> {
-    return this.http.get<any>(this.urlApi+'/{{id}}')
+  public getOneUser(id: number): Observable<any> {
+    const url = `http://localhost:8080/api/v1/users/${id}`;
+    return this.http.get<number>(url);
   }
 
-  public createUser(formData : User ) : Observable<any> {
-    return this.http.post(this.urlApi, formData)
+  public createUser(newUser: any): Observable<any> {
+    return this.http.post<any>(this.urlApi, newUser, {
+      headers: { 'Content-Type': 'application/json' },
+      observe: 'body',
+    });
   }
 
+  deleteUser(id: number): Observable<any> {
+    const url = `http://localhost:8080/api/v1/users/${id}`;
+    return this.http.delete(url);
+  }
+  
+  
+  
+
+  // public deleteUser(id: string): Observable<any> {
+  //   let deleteUrl = this.urlApi + '/id';
+  //   console.log(deleteUrl);
+  //   return this.http.delete(deleteUrl);
+  // }
+  public editUser(id: number, newUser: User): Observable<any> {
+    const url = `http://localhost:8080/api/v1/users/${id}`;
+    return this.http.post<any>(url, newUser, {
+      headers: { 'Content-Type': 'application/json' },
+      observe: 'body',
+    });
+  }
 
 }

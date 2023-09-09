@@ -4,12 +4,14 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { UserComponent } from './user/user.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 const routes: Routes = [
-  { path: '', component: NavComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'users', component: UserComponent },
-  { path: 'createUser', component: CreateUserComponent }
+  { path: 'createUser', component: CreateUserComponent },
+  { path: 'updateUser', component: UpdateUserComponent }
 ];
 
 @NgModule({

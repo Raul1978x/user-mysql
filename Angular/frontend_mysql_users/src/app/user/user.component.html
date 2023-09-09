@@ -10,6 +10,7 @@
         <th scope="col">Dirección</th>
         <th scope="col">Teléfono</th>
         <th scope="col">Código Postal</th>
+        <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody *ngFor="let item of data">
@@ -21,6 +22,12 @@
         <td scope="row">{{ item.direccion }}</td>
         <td scope="row">{{ item.telefono }}</td>
         <td scope="row">{{ item.codigoPostal }}</td>
+        <td scope="row">
+          <button (click)="goToEdit(item.id)"  class="btn btn-close-white " type="button">✒️</button>
+          <button (click)="onDelete(item.id)" class="btn btn-close-white" type="button">❌</button>
+
+
+        </td>
       </tr>
     </tbody>
   </table>

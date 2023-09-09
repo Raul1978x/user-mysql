@@ -1,10 +1,10 @@
 <br />
 <br />
 <h2 class="justify-content-center text-center bg-dark text-bg-dark py-1">
-  Registro
+  Editar {{editUsuario}}
 </h2>
 <div class="container m-5">
-  <form [formGroup]="usuario" (ngSubmit)="onSubmit()">
+  <form [formGroup]="editUsuario" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre</label>
       <input
@@ -84,14 +84,10 @@
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" id="password" name="password" formControlName="password"/>
     </div>
-    <div class="mb-3 d-flex ">
-      <button class="btn btn-dark d-flex justify-content-end me-3" type="submit">
+    <div class="mb-3">
+      <button class="btn btn-dark d-flex justify-content-end" type="submit">
         Guardar
       </button>
-      <button class="btn btn-dark d-flex justify-content-end me-3" type="button" routerLink='../home'  >
-        Ir Usuarios
-      </button>
-      
     </div>
   </form>
 </div>
