@@ -17,7 +17,7 @@ public class User {
     private String nombre;
     private String apellido;
     private String telefono;
-    private String DNI;
+    private String dni;
     private String direccion;
     private String codigoPostal;
 

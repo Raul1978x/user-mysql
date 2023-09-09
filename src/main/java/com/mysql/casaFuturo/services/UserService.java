@@ -69,7 +69,7 @@ public class UserService {
                 newUser.setNombre(user.getNombre());
                 newUser.setApellido(user.getApellido());
                 newUser.setTelefono(user.getTelefono());
-                newUser.setDNI(user.getDNI());
+                newUser.setDni(user.getDni());
                 newUser.setDireccion(user.getDireccion());
                 newUser.setCodigoPostal(user.getCodigoPostal());
                 return userRepository.save(newUser);
@@ -87,7 +87,7 @@ public class UserService {
         try {
             User user = userRepository.findByEmailAndPassword(email, password);
             UserDTO userDTO = new UserDTO(user.getId(), user.getNombre(), user.getApellido(), user.getTelefono(),
-                    user.getDNI(), user.getDireccion(), user.getCodigoPostal());
+                    user.getDni(), user.getDireccion(), user.getCodigoPostal());
             return userDTO;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

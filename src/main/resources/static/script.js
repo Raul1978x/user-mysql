@@ -11,11 +11,25 @@ window.onload = () =>{
 function agregarUsuario() {
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
+    const nombre = document.querySelector("#nombre").value;
+    const apellido = document.querySelector("#apellido").value;
+    const direccion = document.querySelector("#direccion").value;
+    const codigoPostal = document.querySelector("#codigoPostal").value;
+    const dni = document.querySelector("#dni").value;
+    const telefono = document.querySelector("#telefono").value;
 
     const userData = {
-        email: email,
-        password: password
+        nombre,
+        apellido,
+        direccion,
+        codigoPostal,
+        dni,
+        telefono,
+        email,
+        password
     };
+
+    console.log("userData:", userData);
 
     fetch("http://localhost:8080/api/v1/users", {
         method: "POST",

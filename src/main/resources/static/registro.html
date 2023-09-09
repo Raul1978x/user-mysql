@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Registro de usuario</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./registro.html" onclick="verRegistro()"><h3>Crear usuario</h3></a>
+            <a href="./index.html" ><h3>Ver usuarios</h3></a>
+        </nav>
+    </header>
+
+    <div class="containerUsuario">
+        <h2>Registro de Usuario</h2>
+        <form class="registrationForm"> <!-- Agregamos la clase "registrationForm" al formulario -->
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Raul" required>
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Gomez" required>
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Sarmiento 2291" required>
+            <label for="codigoPostal">Código postal</label>
+            <input type="text" id="codigoPostal" name="codigoPostal" placeholder="5501" required>
+            <label for="telefono">Telefono</label>
+            <input type="number" id="telefono" name="telefono" placeholder="+54 2613512457" required>
+            <label for="dni">DNI</label>
+            <input type="number" id="dni" name="dni" placeholder="27154521" required>
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" placeholder="raul@gomez.com" required>
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" placeholder="********" name="password" required>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>        
+
+</body>
+<script src="./script.js"></script>
+</html>
