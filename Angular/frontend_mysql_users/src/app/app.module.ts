@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     UserComponent,
     FooterComponent,
     CreateUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

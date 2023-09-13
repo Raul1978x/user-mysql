@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { User } from '../create-user/user';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataService } from './../services/data.service';
 
 @Component({
   selector: 'app-update-user',
@@ -11,47 +12,24 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class UpdateUserComponent implements OnInit {
   editUsuario!: FormGroup;
+  id!: string;
   user!: User;
-  constructor(private apiService: ApiService,
+  constructor(
+    private dataService: DataService,
+    private apiService: ApiService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute) { }
 
-  }
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.user = params['user'];
-    })
-    // this.apiService.getOneUser(id).subscribe((response) => {
-    //   this.user = response;
-    //   // console.log(this.user);
-    // })
-    // this.editForm();
-     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + JSON.stringify(this.user));
-  }
+    this.route.queryParams.subscribe((params:Params) => {
+      this.id = params['id'];
+    });
 
-  onSubmit(): void {
-    const userData:User = this.editUsuario.value;
-    this.apiService.editUser(userData.id!, userData).subscribe(
-      (response) => {
-        console.log('Respuesta:', response);
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
-  }
-
-  editForm(): FormGroup {
-    return this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.minLength(7)]],
-      direccion: ['', [Validators.required]],
-      codigoPostal: ['', [Validators.required, Validators.maxLength(4)]],
-      dni: ['', [Validators.required, Validators.maxLength(8)]]
+    this.dataService.getUser(this.id).subscribe((response) => {
+      this.user = response;
+      console.log(response);
+      
     });
   }
 }

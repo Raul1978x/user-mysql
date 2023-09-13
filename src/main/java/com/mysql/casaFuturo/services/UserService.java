@@ -6,6 +6,7 @@ import com.mysql.casaFuturo.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +53,7 @@ public class UserService {
     @Transactional
     public User createUser(User user) throws Exception {
         try {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             return userRepository.save(user);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -65,7 +67,8 @@ public class UserService {
             if (response.isPresent()) {
                 User newUser = response.get();
                 newUser.setEmail(user.getEmail());
-                newUser.setPassword(user.getPassword());
+                //newUser.setPassword(user.getPassword());
+                newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
                 newUser.setNombre(user.getNombre());
                 newUser.setApellido(user.getApellido());
                 newUser.setTelefono(user.getTelefono());
@@ -86,6 +89,17 @@ public class UserService {
     public UserDTO login(String email, String password) throws Exception {
         try {
             User user = userRepository.findByEmailAndPassword(email, password);
+            UserDTO userDTO = new UserDTO(user.getId(), user.getNombre(), user.getApellido(), user.getTelefono(),
+                    user.getDNI(), user.getDireccion(), user.getCodigoPostal());
+            return userDTO;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+    } @Transactional(readOnly = true)
+    public UserDTO findByEmail(String email) throws Exception {
+        try {
+            User user = userRepository.findByEmail(email);
             UserDTO userDTO = new UserDTO(user.getId(), user.getNombre(), user.getApellido(), user.getTelefono(),
                     user.getDNI(), user.getDireccion(), user.getCodigoPostal());
             return userDTO;

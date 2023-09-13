@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ApiService } from '../services/api.service';
 import { User } from './user';
+import { DataService } from './../services/data.service';
 
 @Component({
   selector: 'app-create-user',
@@ -12,7 +13,10 @@ export class CreateUserComponent implements OnInit {
   created: boolean = false;
   usuario!: FormGroup;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {
+  constructor(
+    private dataService: DataService,
+    private apiService: ApiService, 
+    private fb: FormBuilder) {
 
   }
   ngOnInit(): void {
@@ -21,7 +25,7 @@ export class CreateUserComponent implements OnInit {
 
   onSubmit(): void {
     const userData = this.usuario.value;
-    this.apiService.createUser(userData).subscribe(
+    this.dataService.addNewUser(userData).subscribe(
       (response) => {
         console.log('Respuesta:', response);
         this.created = true;

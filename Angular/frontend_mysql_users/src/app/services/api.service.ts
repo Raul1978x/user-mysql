@@ -17,7 +17,7 @@ export class ApiService implements OnInit {
   }
 
   public getOneUser(id: number): Observable<any> {
-    const url = `http://localhost:8080/api/v1/users/${id}`;
+    const url = `${this.urlApi}/${id}`;
     return this.http.get<number>(url);
   }
 
@@ -28,8 +28,8 @@ export class ApiService implements OnInit {
     });
   }
 
-  deleteUser(id: number): Observable<any> {
-    const url = `http://localhost:8080/api/v1/users/${id}`;
+  public deleteUser(id: number): Observable<any> {
+    const url = `${this.urlApi}/${id}`;
     return this.http.delete(url);
   }
   
@@ -42,11 +42,15 @@ export class ApiService implements OnInit {
   //   return this.http.delete(deleteUrl);
   // }
   public editUser(id: number, newUser: User): Observable<any> {
-    const url = `http://localhost:8080/api/v1/users/${id}`;
+    const url = `${this.urlApi}/${id}`;
     return this.http.post<any>(url, newUser, {
       headers: { 'Content-Type': 'application/json' },
       observe: 'body',
     });
+  }
+  public getUserByEmail(email: string): Observable<any> {
+    const url = `http://localhost:8080/api/v1/search`;
+    return this.http.get<string>(url);
   }
 
 }

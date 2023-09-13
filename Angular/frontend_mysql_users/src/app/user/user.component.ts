@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../create-user/user';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-user',
@@ -12,27 +13,35 @@ import { Router } from '@angular/router';
 export class UserComponent {
   data: any[] = [];
   user!: User;
+  id!: number;
   usuario!: FormGroup;
-  constructor(private apiService: ApiService, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private dataService: DataService,
+    private apiService: ApiService, 
+    private fb: FormBuilder, 
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getAllData();
   }
   getAllData() {
-    this.apiService.getAllUsers().subscribe(data => {
+    this.dataService.getUsers().subscribe(data => {
       this.data = data;
       // console.log(this.data)
     })
   }
-  goToEdit(id: number): void {
-    this.apiService.getOneUser(id).subscribe((response) => {
+  goToEdit(id: string): void {
+    this.dataService.getUser(id).subscribe((response) => {
       this.user = response;
-      // console.log(this.user);
+      response.id = this.user.id;
+      console.log(this.user.id);
+      
+      console.log(this.user);
     })
-    let userEdit = this.user;
-    this.router.navigate(['updateUser'], {
+   
+    this.router.navigate(['updateUser', id], {
       queryParams: {
-        user: userEdit,
+        id: this.id,
         // {
         //   email: userEdit.email,
         //   password: '',

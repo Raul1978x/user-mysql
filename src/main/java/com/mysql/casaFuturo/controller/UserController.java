@@ -68,5 +68,14 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
         }
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> findByEmail(@RequestBody User user) {
+        try {
+        return ResponseEntity.ok(userService.findByEmail(user.getEmail()));
+        }
+        catch  (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
+        }
+    }
 
 }
